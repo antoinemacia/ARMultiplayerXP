@@ -29,6 +29,9 @@ public class MovementController : MonoBehaviour {
 
     // Apply Movement
     Move (_MovementVelocityVector);
+
+    // Apply Tilt/Rotation
+    ApplyTiltEffect ();
   }
 
   private Vector3 velocityVector = Vector3.zero; // initial velocity
@@ -61,11 +64,6 @@ public class MovementController : MonoBehaviour {
       // Apply a force by the amount of velocity change to reach the target velocity
       body.AddForce (velocityChange, ForceMode.Acceleration);
     }
-
-    // Quaternions are used to represent rotations.
-    // https://docs.unity3d.com/ScriptReference/Quaternion.html
-    // This line bellow adds a tilting rotation effect on the body when using the joystick
-    ApplyTiltEffect ();
   }
 
   private float verticalTilt;
