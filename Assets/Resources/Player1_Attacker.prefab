@@ -305,6 +305,7 @@ GameObject:
   - component: {fileID: 2523371896380985838}
   - component: {fileID: 2523371896380985824}
   - component: {fileID: 2143095824}
+  - component: {fileID: 1367891644}
   m_Layer: 0
   m_Name: Player1_Attacker
   m_TagString: Player
@@ -387,6 +388,21 @@ MonoBehaviour:
   speed: 2
   maxVelocityChange: 4
   tiltAmount: 10
+--- !u!114 &1367891644
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2523371896380985836}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 180db79494b3a44c5ba971798a61eee1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spinSpeed: 3600
+  doSpin: 1
+  playerGraphics: {fileID: 2523371895095917476}
 --- !u!1 &2523371896480695252
 GameObject:
   m_ObjectHideFlags: 0
@@ -1081,8 +1097,7 @@ PrefabInstance:
       propertyPath: m_Name
       value: Fixed Joystick
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 3274740919687912929, guid: aaa2c939c0359ac4dbce3f49e8b90252, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aaa2c939c0359ac4dbce3f49e8b90252, type: 3}
 --- !u!224 &2929252285184768590 stripped
 RectTransform:

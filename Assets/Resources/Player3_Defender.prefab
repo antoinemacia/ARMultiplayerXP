@@ -416,6 +416,7 @@ GameObject:
   - component: {fileID: 2704344292416587956}
   - component: {fileID: 4573508279389110243}
   - component: {fileID: 106832831850595309}
+  - component: {fileID: 816485685146823143}
   m_Layer: 0
   m_Name: Player3_Defender
   m_TagString: Player
@@ -524,6 +525,21 @@ MonoBehaviour:
   speed: 2
   maxVelocityChange: 4
   tiltAmount: 10
+--- !u!114 &816485685146823143
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2269595059983960058}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 180db79494b3a44c5ba971798a61eee1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spinSpeed: 3600
+  doSpin: 1
+  playerGraphics: {fileID: 2269595061132471730}
 --- !u!1 &2269595060150874238
 GameObject:
   m_ObjectHideFlags: 0
