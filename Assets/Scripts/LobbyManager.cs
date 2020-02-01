@@ -17,6 +17,8 @@ public class LobbyManager : MonoBehaviourPunCallbacks {
 
   [Header ("Connection Status UI")]
   public GameObject ui_ConnectionStatusGameObject;
+  public Text connectionStatusText;
+  public bool showConnectionStatus = false;
 
   #region Unity Methods
   // Start is called before the first frame update
@@ -27,7 +29,9 @@ public class LobbyManager : MonoBehaviourPunCallbacks {
 
   // Update is called once per frame
   void Update () {
-
+    if (showConnectionStatus) {
+      connectionStatusText.text = ("Connecting " + PhotonNetwork.NetworkClientState + " ...");
+    }
   }
   #endregion
 
@@ -38,6 +42,8 @@ public class LobbyManager : MonoBehaviourPunCallbacks {
 
     if (!string.IsNullOrEmpty (playerName)) {
       // Then, when player name is submitted, set loading panel
+
+      showConnectionStatus = true;
       displayLoading ();
       if (!PhotonNetwork.IsConnected) {
         PhotonNetwork.LocalPlayer.NickName = playerName;
