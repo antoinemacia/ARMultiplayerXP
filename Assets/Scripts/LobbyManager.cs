@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using Photon.Pun;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-
 public class LobbyManager : MonoBehaviourPunCallbacks {
 
   [Header ("Login UI")]
@@ -36,6 +36,11 @@ public class LobbyManager : MonoBehaviourPunCallbacks {
   #endregion
 
   #region UI Callback Methods
+
+  public void OnClickQuickMatch () {
+    SceneManager.LoadScene ("Scene_Loading");
+  }
+
   public void OnEnterGameButtonClicked () {
 
     string playerName = playerNameInputField.text;
