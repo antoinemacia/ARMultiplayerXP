@@ -38,7 +38,8 @@ public class LobbyManager : MonoBehaviourPunCallbacks {
   #region UI Callback Methods
 
   public void OnClickQuickMatch () {
-    SceneManager.LoadScene ("Scene_Loading");
+    // SceneManager.LoadScene ("Scene_Loading");
+    SceneSwitcher.Instance.LoadScene ("Scene_PlayerSelection");
   }
 
   public void OnEnterGameButtonClicked () {
