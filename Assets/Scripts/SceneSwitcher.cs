@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class ScreenSwitcher : Singleton<ScreenSwitcher> {
+public class SceneSwitcher : Singleton<SceneSwitcher> {
 
   private string sceneNameToBeLoaded;
 
