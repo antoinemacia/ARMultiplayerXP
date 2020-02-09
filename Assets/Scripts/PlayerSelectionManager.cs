@@ -23,12 +23,18 @@ public class PlayerSelectionManager : MonoBehaviour {
   float degrees = 90;
   float secondsToTurn = 1.0f;
 
+  public Button nextButton;
   public void NextPlayer () {
+    nextButton.enabled = false;
+    prevButton.enabled = false;
     // Vector3.up is shorthand for Vector3(0, 1, 0).
     StartCoroutine (Rotate (Vector3.up, playerSwitcherTransform, degrees, secondsToTurn));
   }
 
+  public Button prevButton;
   public void PreviousPlayer () {
+    nextButton.enabled = false;
+    prevButton.enabled = false;
     // Vector3.up is shorthand for Vector3(0, 1, 0).
     StartCoroutine (Rotate (Vector3.up, playerSwitcherTransform, -degrees, secondsToTurn));
   }
@@ -53,7 +59,8 @@ public class PlayerSelectionManager : MonoBehaviour {
     }
 
     transformToRotate.rotation = finalRotation;
-
+    nextButton.enabled = true;
+    prevButton.enabled = true;
   }
 
   #endregion
