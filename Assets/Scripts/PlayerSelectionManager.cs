@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using Photon.Pun;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,6 +9,9 @@ public class PlayerSelectionManager : MonoBehaviour {
 
   public int playerSelectionNumber;
   public GameObject[] spinnerTopModels;
+
+  [Header ("UI")]
+  public TextMeshProUGUI playerModelType_Text;
 
   #region Unity Methods
   // Start is called before the first frame update
@@ -36,6 +40,7 @@ public class PlayerSelectionManager : MonoBehaviour {
     selectNextPlayer ();
     // Vector3.up is shorthand for Vector3(0, 1, 0).
     StartCoroutine (Rotate (Vector3.up, playerSwitcherTransform, degrees, secondsToTurn));
+    changeSpinnerTypeMenuText ();
   }
 
   public Button prevButton;
@@ -47,6 +52,7 @@ public class PlayerSelectionManager : MonoBehaviour {
     selectPrevPlayer ();
     // Vector3.up is shorthand for Vector3(0, 1, 0).
     StartCoroutine (Rotate (Vector3.up, playerSwitcherTransform, -degrees, secondsToTurn));
+    changeSpinnerTypeMenuText ();
   }
 
   public Button selectButton;
@@ -92,6 +98,15 @@ public class PlayerSelectionManager : MonoBehaviour {
       playerSelectionNumber = spinnerTopModels.Length;
     } else {
       playerSelectionNumber -= 1;
+    }
+  }
+
+  private void changeSpinnerTypeMenuText () {
+    // If selecteed player is one of the first 2 spinners, its type is attack
+    if (playerSelectionNumber == 1 || playerSelectionNumber == 2) {
+      playerModelType_Text.text = "Attack";
+    } else {
+      playerModelType_Text.text = "Defend";
     }
   }
 
