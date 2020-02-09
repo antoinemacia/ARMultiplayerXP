@@ -12,10 +12,16 @@ public class PlayerSelectionManager : MonoBehaviour {
 
   [Header ("UI")]
   public TextMeshProUGUI playerModelType_Text;
+  public GameObject ui_Selection;
+  public GameObject ui_AfterSelection;
+  public Button selectButton;
+  public Button prevButton;
 
   #region Unity Methods
   // Start is called before the first frame update
   void Start () {
+    ui_Selection.SetActive (true);
+    ui_AfterSelection.SetActive (false);
     playerSelectionNumber = 1;
   }
 
@@ -43,7 +49,6 @@ public class PlayerSelectionManager : MonoBehaviour {
     changeSpinnerTypeMenuText ();
   }
 
-  public Button prevButton;
   public void PreviousPlayer () {
     // Disable buttons to avoid repetition
     nextButton.enabled = false;
@@ -55,10 +60,24 @@ public class PlayerSelectionManager : MonoBehaviour {
     changeSpinnerTypeMenuText ();
   }
 
-  public Button selectButton;
   public void OnSelectButtonClicked () {
+    ui_Selection.SetActive (false);
+    ui_AfterSelection.SetActive (true);
     ExitGames.Client.Photon.Hashtable playerSeletionProp = new ExitGames.Client.Photon.Hashtable { { MultiplayerARSpinnerTopGame.PLAYER_SELECTION_NUMBER, playerSelectionNumber - 1 } };
     PhotonNetwork.LocalPlayer.SetCustomProperties (playerSeletionProp);
+  }
+
+  public void OnReSelectButtonClicked () {
+    ui_AfterSelection.SetActive (false);
+    ui_Selection.SetActive (true);
+  }
+
+  public void OnBattleButtonClicked () {
+    SceneSwitcher.Instance.LoadScene ("Scene_Gameplay");
+  }
+
+  public void OnBackButtonClicked () {
+    SceneSwitcher.Instance.LoadScene ("Scene_Lobby");
   }
 
   #endregion

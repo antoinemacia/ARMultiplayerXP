@@ -24,7 +24,11 @@ public class LobbyManager : MonoBehaviourPunCallbacks {
   // Start is called before the first frame update
   void Start () {
     // When app is loaded, Display the Login Screen (With nickname input)
-    displayPlayerLogin ();
+    if (PhotonNetwork.IsConnected) {
+      displayLobby ();
+    } else {
+      displayPlayerLogin ();
+    }
   }
 
   // Update is called once per frame

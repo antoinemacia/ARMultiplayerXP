@@ -209,7 +209,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1641444442}
         m_MethodName: OnBattleButtonClicked
         m_Mode: 1
         m_Arguments:
@@ -526,7 +526,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1641444442}
         m_MethodName: OnReSelectButtonClicked
         m_Mode: 1
         m_Arguments:
@@ -657,7 +657,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &347055308
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2199,7 +2199,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1641444442}
         m_MethodName: OnBackButtonClicked
         m_Mode: 1
         m_Arguments:
@@ -2577,7 +2577,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1641444442}
         m_MethodName: OnSelectButtonClicked
         m_Mode: 1
         m_Arguments:
@@ -2944,7 +2944,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c87845abe3c0f48e2a836ae1997e16bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerSelectionNumber: 1
+  spinnerTopModels:
+  - {fileID: 1327619905}
+  - {fileID: 882062676}
+  - {fileID: 174618834}
+  - {fileID: 955095336}
+  playerModelType_Text: {fileID: 2010573073}
+  ui_Selection: {fileID: 1325910398}
+  ui_AfterSelection: {fileID: 347055307}
+  selectButton: {fileID: 1571653640}
+  prevButton: {fileID: 1017666831}
   playerSwitcherTransform: {fileID: 1158278241}
+  nextButton: {fileID: 1289593102}
 --- !u!4 &1641444443
 Transform:
   m_ObjectHideFlags: 0
