@@ -1,12 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using Photon.Pun;
+using TMPro;
 using UnityEngine;
 
 // ----------------------------------------------------------------
 // This script ensures the setup of the game is for local gaming only
 // ----------------------------------------------------------------
 public class PlayerSetup : MonoBehaviourPun {
+
+  public TextMeshProUGUI text_PlayerName;
   // Start is called before the first frame update
   void Start () {
     if (photonView.IsMine) {
@@ -19,10 +22,16 @@ public class PlayerSetup : MonoBehaviourPun {
       transform.GetComponent<MovementController> ().enabled = false;
       transform.GetComponent<MovementController> ().joystick.gameObject.SetActive (false);
     }
+
+    SetPlayerName ();
   }
 
-  // Update is called once per frame
-  void Update () {
-
+  void SetPlayerName () {
+    if (photonView.IsMine) {
+      text_PlayerName.color = Color.red;
+    }
+    if (text_PlayerName != null) {
+      text_PlayerName.text = photonView.Owner.NickName;
+    }
   }
 }
