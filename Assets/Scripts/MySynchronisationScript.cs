@@ -3,17 +3,19 @@ using System.Collections.Generic;
 using Photon.Pun;
 using UnityEngine;
 
-public class MySynchonisationScript : MonoBehaviour, IPunObservable {
+public class MySynchronisationScript : MonoBehaviour, IPunObservable {
 
-  RigidBody rb;
+  Rigidbody rb;
   PhotonView photonView;
-  Vector3 newtorkPosition;
+  Vector3 networkPosition;
   Quaternion networkRotation;
 
   // This is loaded before the script start (kinda like an initializer)
   private void Awake () {
-    rb = GetComponent<RigidBody> ();
+    rb = GetComponent<Rigidbody> ();
     photonView = GetComponent<PhotonView> ();
+    networkPosition = new Vector3 ();
+    networkRotation = new Quaternion ();
   }
 
   // Start is called before the first frame update
@@ -35,7 +37,7 @@ public class MySynchonisationScript : MonoBehaviour, IPunObservable {
     }
   }
 
-  public OnPhotonSerializeView (PhotonStream stream, PhotonMessageInfo info) {
+  public void OnPhotonSerializeView (PhotonStream stream, PhotonMessageInfo info) {
     // This stream is sending and receiving data to a PhotonView observable
     if (stream.IsWriting) {
       // If true, this means the photon view is running on my device and I'm the one to who
@@ -46,7 +48,7 @@ public class MySynchonisationScript : MonoBehaviour, IPunObservable {
     } else {
       // If false, it means the stream is reading. Meaning we're listening to other players.
       networkPosition = (Vector3) stream.ReceiveNext ();
-      networkRotation = (Quartenion) stream.ReceiveNext ();
+      networkRotation = (Quaternion) stream.ReceiveNext ();
     }
   }
 }
