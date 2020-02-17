@@ -10,6 +10,13 @@ public class MySynchronisationScript : MonoBehaviour, IPunObservable {
   Vector3 networkPosition;
   Quaternion networkRotation;
 
+  public bool synchronizeVelocity = true;
+  public bool synchronizeAngularVelocity = true;
+  public bool isTeleportEnabled = true;
+  public float teleportIfDistanceGreaterThan = 1.0f;
+
+  private float distance;
+  private float angle;
   // This is loaded before the script start (kinda like an initializer)
   private void Awake () {
     rb = GetComponent<Rigidbody> ();
@@ -30,10 +37,11 @@ public class MySynchronisationScript : MonoBehaviour, IPunObservable {
 
   // Here using FixedUodate since we're dealing with a RigidBody
   private void FixedUpdate () {
-
     if (!photonView.IsMine) {
-      rb.position = Vector3.MoveTowards (rb.position, networkPosition, Time.fixedDeltaTime);
-      rb.rotation = Quaternion.RotateTowards (rb.rotation, networkRotation, Time.fixedDeltaTime * 100);
+      // The more distance/angle * (1.0f / PhotonNetwork.SerializationRate) is high
+      // The more the position will be refreshed
+      rb.position = Vector3.MoveTowards (rb.position, networkPosition, distance * (1.0f / PhotonNetwork.SerializationRate));
+      rb.rotation = Quaternion.RotateTowards (rb.rotation, networkRotation, angle * (1.0f / PhotonNetwork.SerializationRate));
     }
   }
 
@@ -45,10 +53,52 @@ public class MySynchronisationScript : MonoBehaviour, IPunObservable {
       // Which is the version of my player on other peoples devices
       stream.SendNext (rb.position);
       stream.SendNext (rb.rotation);
+
+      if (synchronizeVelocity) {
+        stream.SendNext (rb.velocity);
+      }
+
+      if (synchronizeAngularVelocity) {
+        stream.SendNext (rb.angularVelocity);
+      }
     } else {
       // If false, it means the stream is reading. Meaning we're listening to other players.
       networkPosition = (Vector3) stream.ReceiveNext ();
       networkRotation = (Quaternion) stream.ReceiveNext ();
+
+      if (isTeleportEnabled) {
+        // If the distance between local & network position is higher than
+        // our teleport threshold, teleport!
+        if (Vector3.Distance (rb.position, networkPosition) > teleportIfDistanceGreaterThan) {
+          rb.position = networkPosition;
+        }
+      }
+
+      // This segment aims to conpensate the lag caused by the network
+      // See https://doc.photonengine.com/en-us/pun/v2/gameplay/lagcompensation
+      if (synchronizeVelocity || synchronizeAngularVelocity) {
+        // PhotonNetwork = Time accross all devices synced (server time)
+        // SentServerTime = Time where information hads been sent
+        float lag = Mathf.Abs ((float) (PhotonNetwork.Time - info.SentServerTime));
+
+        if (synchronizeVelocity) {
+          rb.velocity = (Vector3) stream.ReceiveNext ();
+          // Note: The velocity is in meters per second
+          // Timing it by the lag reduces the disrepency
+          networkPosition += rb.velocity * lag;
+
+          // This distance represent the difference between local position & network position
+          distance = Vector3.Distance (rb.position, networkPosition);
+        }
+
+        if (synchronizeAngularVelocity) {
+          rb.angularVelocity = (Vector3) stream.ReceiveNext ();
+
+          networkRotation = Quaternion.Euler (rb.angularVelocity * lag) * networkRotation;
+
+          angle = Quaternion.Angle (rb.rotation, networkRotation);
+        }
+      }
     }
   }
 }
