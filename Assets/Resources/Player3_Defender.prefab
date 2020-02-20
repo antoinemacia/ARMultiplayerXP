@@ -607,6 +607,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad8a9293be0b142a095e26047e789b98, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spinnerScript: {fileID: 816485685146823143}
+  spinSpeedBar_Text: {fileID: 512058580104729394}
+  spinSpeedBar_Image: {fileID: 2269595059424446845}
 --- !u!1 &2269595060150874238
 GameObject:
   m_ObjectHideFlags: 0

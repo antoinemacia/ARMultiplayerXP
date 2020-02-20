@@ -811,6 +811,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad8a9293be0b142a095e26047e789b98, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spinnerScript: {fileID: 2352136738655259052}
+  spinSpeedBar_Text: {fileID: 100848075634437743}
+  spinSpeedBar_Image: {fileID: 1802076416973763616}
 --- !u!1 &1802076418753269999
 GameObject:
   m_ObjectHideFlags: 0
