@@ -381,6 +381,7 @@ GameObject:
   - component: {fileID: -1050453065017182592}
   - component: {fileID: -8103155138530665927}
   - component: {fileID: 6098320014341363744}
+  - component: {fileID: -1223344021315581428}
   m_Layer: 0
   m_Name: Player4_Defender
   m_TagString: Player
@@ -549,6 +550,22 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 35dc4d555d87247a9b555f314093ecb1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  synchronizeVelocity: 1
+  synchronizeAngularVelocity: 1
+  isTeleportEnabled: 1
+  teleportIfDistanceGreaterThan: 1
+--- !u!114 &-1223344021315581428
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4663518797756989780}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad8a9293be0b142a095e26047e789b98, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &4663518798063194202
