@@ -568,6 +568,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad8a9293be0b142a095e26047e789b98, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ui_3D_GameObject: {fileID: 4663518798063194202}
+  deathPanelUIPrefab: {fileID: 3593783272886976281, guid: 0367e5d2c0c49da4b80c7fe1c169056c,
+    type: 3}
   spinnerScript: {fileID: 2741333733566549870}
   spinSpeedBar_Text: {fileID: 6403045122420741532}
   spinSpeedBar_Image: {fileID: 4663518798249398227}
