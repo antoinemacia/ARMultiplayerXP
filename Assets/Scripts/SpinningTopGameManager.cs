@@ -28,6 +28,15 @@ public class SpinningTopGameManager : MonoBehaviourPunCallbacks {
     PhotonNetwork.JoinRandomRoom ();
     searchForGamesButtonGameObject.SetActive (false);
   }
+
+  public void OnQuitMatchButtonClicked () {
+    if (PhotonNetwork.InRoom) {
+      PhotonNetwork.LeaveRoom ();
+    } else {
+      SceneSwitcher.Instance.LoadScene ("Scene_Lobby");
+    }
+  }
+
   #endregion
 
   #region PHOTON Callback Methods
@@ -59,6 +68,10 @@ public class SpinningTopGameManager : MonoBehaviourPunCallbacks {
 
     // This removes the messaging UI as the game is about to start
     StartCoroutine (DeactivateAfterSeconds (ui_InformPanelGameObject, 2.0f));
+  }
+
+  public override void OnLeftRoom () {
+    SceneSwitcher.Instance.LoadScene ("Scene_Lobby");
   }
   #endregion
 

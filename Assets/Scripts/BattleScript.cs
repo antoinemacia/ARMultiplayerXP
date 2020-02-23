@@ -8,6 +8,10 @@ using UnityEngine.UI;
 public class BattleScript : MonoBehaviourPun {
 
   // TODO - Refactor to classes for spinner types
+  // BUG - Ensure spinners dont hit each others on start
+  // BUG - Ensure attackers do not each to much life
+  // BUG - Spin speed of all players is back to full on re-match even know old player has little life
+
 
   public GameObject ui_3D_GameObject;
   public GameObject deathPanelUIPrefab;
@@ -30,8 +34,8 @@ public class BattleScript : MonoBehaviourPun {
   [Header ("Player Type Damage Coefficients")]
   public float common_Damage_Coefficient = 0.04f;
 
-  public float doDamage_Coefficient_Attacker = 10f; // do more damage than defender - ADVANTAGE
-  public float getDamaged_Coefficient_Attacker = 1.2f; // gets more damage - DISADVANTAGE
+  public float doDamage_Coefficient_Attacker = 3f; // do more damage than defender - ADVANTAGE
+  public float getDamaged_Coefficient_Attacker = 0.8f; // gets more damage - DISADVANTAGE
 
   public float doDamage_Coefficient_Defender = 0.75f; // do less damage - DISADVANTAGE
   public float getDamaged_Coefficient_Defender = 0.2f; // gets less damage - ADVANTAGE
