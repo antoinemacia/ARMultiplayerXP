@@ -571,6 +571,13 @@ MonoBehaviour:
   spinnerScript: {fileID: 2741333733566549870}
   spinSpeedBar_Text: {fileID: 6403045122420741532}
   spinSpeedBar_Image: {fileID: 4663518798249398227}
+  isAttacker: 0
+  isDefender: 0
+  common_Damage_Coefficient: 0.04
+  doDamage_Coefficient_Attacker: 10
+  getDamaged_Coefficient_Attacker: 1.2
+  doDamage_Coefficient_Defender: 0.75
+  getDamaged_Coefficient_Defender: 0.2
 --- !u!1 &4663518798063194202
 GameObject:
   m_ObjectHideFlags: 0
