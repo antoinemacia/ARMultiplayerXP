@@ -14,7 +14,6 @@ public class SpinningTopGameManager : MonoBehaviourPunCallbacks {
   // Start is called before the first frame update
   void Start () {
     ui_InformPanelGameObject.SetActive (true);
-    ui_InformText.text = "Searching for games to battle...";
   }
 
   // Update is called once per frame
