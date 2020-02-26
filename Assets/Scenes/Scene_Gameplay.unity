@@ -1651,6 +1651,7 @@ GameObject:
   - component: {fileID: 894482967}
   - component: {fileID: 894482971}
   - component: {fileID: 894482970}
+  - component: {fileID: 894482972}
   m_Layer: 0
   m_Name: AR Session Origin
   m_TagString: Untagged
@@ -1727,6 +1728,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   arCamera: {fileID: 1528480131}
   battleArenaGameObject: {fileID: 760013867502548235}
+--- !u!114 &894482972
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 894482966}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d90de857713342a0bb9d0de7ccae5bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  placeButton: {fileID: 0}
+  adjustButton: {fileID: 0}
+  searchForGameButton: {fileID: 0}
+  informUiPanelText: {fileID: 0}
 --- !u!1 &905712417
 GameObject:
   m_ObjectHideFlags: 0
@@ -1745,7 +1762,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &905712418
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1810,7 +1827,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 894482972}
         m_MethodName: EnableARPlacementAndPlaneDetection
         m_Mode: 1
         m_Arguments:
@@ -2119,7 +2136,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1070027340}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 058cba836c1846c3aa1c5fd2e28aea77, type: 3}
   m_Name: 
@@ -2361,7 +2378,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1543558402
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2426,7 +2443,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 894482972}
         m_MethodName: DisableARPlacementAndPlaneDetection
         m_Mode: 1
         m_Arguments:
