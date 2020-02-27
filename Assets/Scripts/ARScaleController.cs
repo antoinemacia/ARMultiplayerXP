@@ -23,7 +23,7 @@ public class ARScaleController : MonoBehaviour {
 
   public void OnSliderValueChanged (float value) {
     if (scaleSlider != null) {
-      m_ARSessionOrigin.transform.localScale = Vector3.one * value;
+      m_ARSessionOrigin.transform.localScale = Vector3.one / value;
     }
   }
 }

@@ -9,6 +9,7 @@ public class ARPlacementDetectionController : MonoBehaviour {
   public GameObject placeButton;
   public GameObject adjustButton;
   public GameObject searchForGameButton;
+  public GameObject scaleSlider;
   public TextMeshProUGUI informUiPanelText;
   ARPlacementManager m_ARPlacementManager;
   ARPlaneManager m_ARPlaneManager;
@@ -32,6 +33,7 @@ public class ARPlacementDetectionController : MonoBehaviour {
     m_ARPlacementManager.enabled = false;
 
     SetAllPlanesActiveOrDeactive (false);
+    scaleSlider.SetActive (false);
     placeButton.SetActive (false);
     adjustButton.SetActive (true);
     searchForGameButton.SetActive (true);
@@ -45,10 +47,11 @@ public class ARPlacementDetectionController : MonoBehaviour {
     m_ARPlacementManager.enabled = true;
 
     SetAllPlanesActiveOrDeactive (true);
+    scaleSlider.SetActive (true);
     adjustButton.SetActive (false);
     placeButton.SetActive (true);
     searchForGameButton.SetActive (false);
-    
+
     informUiPanelText.text = "Move phone detect planes and place the arena";
   }
 
