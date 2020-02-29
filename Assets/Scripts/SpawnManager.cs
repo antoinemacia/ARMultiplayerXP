@@ -9,14 +9,15 @@ public class SpawnManager : MonoBehaviourPunCallbacks {
 
   public GameObject[] playerPrefabs;
   public Transform[] spawnPositions;
+  public GameObject battleArenaGameObject;
 
   public enum RaiseEventCodes {
     PlayerSpawnEventCode = 0
   }
 
-  // Start is called before the first frame update
   void Start () {
-
+    // Whenever an event rise, this event will be automatically called with the event data
+    PhotonNetwork.NetworkingClient.EventReceived += OnEvent;
   }
 
   // Update is called once per frame
@@ -24,23 +25,43 @@ public class SpawnManager : MonoBehaviourPunCallbacks {
 
   }
 
+  private void OnDestroy () {
+    PhotonNetwork.NetworkingClient.EventReceived -= OnEvent;
+  }
+
   #region Photon Callback Methods
-  public override void OnJoinedRoom () {
 
-    if (PhotonNetwork.IsConnectedAndReady) {
-      //   object playerSelectionNumber;
-      //   // TODO: Check what is keyword out in C#
-      //   // TODO: Check what is type object in C#
-      //   // TODO: Check Quartenion.Identity
-      //   if (PhotonNetwork.LocalPlayer.CustomProperties.TryGetValue (MultiplayerARSpinnerTopGame.PLAYER_SELECTION_NUMBER, out playerSelectionNumber)) {
-      //     int randomSpawnPoint = Random.Range (0, spawnPositions.Length - 1);
-      //     Vector3 instantiatePosition = spawnPositions[randomSpawnPoint].position;
-      //     // This is how you cast a type
-      //     PhotonNetwork.Instantiate (playerPrefabs[(int) playerSelectionNumber - 1].name, instantiatePosition, Quaternion.identity);
-      //   }
+  // Callback method to be called with event data
+  void OnEvent (EventData photonEvent) {
+    if (photonEvent.Code == (byte) RaiseEventCodes.PlayerSpawnEventCode) {
+      // Store data from event into an array
+      // This data corresponds to the data object sent in the bellow "BrodcastLocation" method
+      object[] data = (object[]) photonEvent.CustomData;
+      Vector3 receivedPosition = (Vector3) data[0];
+      Quaternion receivedRotation = (Quaternion) data[1];
+      int photonViewID = (int) data[2];
+      int receivedPlayerSelectionData = (int) data[3];
 
+      // Instantiate our player in remote people space!
+      GameObject player = Instantiate (
+        playerPrefabs[(int) receivedPlayerSelectionData],
+        // NOTE - Adding the battle arena position now is crucial to place our player
+        // in their space
+        receivedPosition + battleArenaGameObject.transform.position,
+        receivedRotation
+      );
+
+      PhotonView _photonView = player.GetComponent<PhotonView> ();
+      _photonView.ViewID = photonViewID;
     }
   }
+
+  public override void OnJoinedRoom () {
+    if (PhotonNetwork.IsConnectedAndReady) {
+      SpawnPlayer ();
+    }
+  }
+
   #endregion
 
   #region Private methods
@@ -51,7 +72,9 @@ public class SpawnManager : MonoBehaviourPunCallbacks {
     // TODO: Check what is type object in C#
     // TODO: Check Quartenion.Identity
     if (PhotonNetwork.LocalPlayer.CustomProperties.TryGetValue (MultiplayerARSpinnerTopGame.PLAYER_SELECTION_NUMBER, out playerSelectionNumber)) {
+
       int randomSpawnPoint = Random.Range (0, spawnPositions.Length - 1);
+
       Vector3 instantiatePosition = spawnPositions[randomSpawnPoint].position;
 
       // Instantiate player locally using random placement and prefab based on spinner ID
@@ -73,9 +96,12 @@ public class SpawnManager : MonoBehaviourPunCallbacks {
     }
   }
 
+  // Send RPC call to remote players with spawn location
   private void BrodcastLocation (GameObject playerGameObject, PhotonView _photonView, object playerSelectionNumber) {
     object[] data = new object[] {
-      playerGameObject.transform.position,
+      // We don't need to broadcast our battle arena position to others users,
+      // We therefore minus it from the playgerGameObjectLocation
+      playerGameObject.transform.position - battleArenaGameObject.transform.position,
       playerGameObject.transform.rotation,
       _photonView.ViewID,
       playerSelectionNumber
