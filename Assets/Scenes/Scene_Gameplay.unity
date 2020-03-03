@@ -8159,6 +8159,8 @@ MonoBehaviour:
   ui_InformPanelGameObject: {fileID: 212251898}
   ui_InformText: {fileID: 243443568}
   searchForGamesButtonGameObject: {fileID: 623289035}
+  adjust_Button: {fileID: 905712417}
+  raycast_Center_Image: {fileID: 840699912}
 --- !u!4 &2085462309
 Transform:
   m_ObjectHideFlags: 0
@@ -8253,7 +8255,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 760013867502548235}
   m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 5, z: 0}
+  m_LocalPosition: {x: 0, y: 3, z: 0}
   m_LocalScale: {x: 1.4, y: 1.4, z: 1.4}
   m_Children:
   - {fileID: 950113033}
