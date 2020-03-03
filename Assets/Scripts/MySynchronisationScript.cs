@@ -17,12 +17,15 @@ public class MySynchronisationScript : MonoBehaviour, IPunObservable {
 
   private float distance;
   private float angle;
+
+  private GameObject battleArenaGameObject;
   // This is loaded before the script start (kinda like an initializer)
   private void Awake () {
     rb = GetComponent<Rigidbody> ();
     photonView = GetComponent<PhotonView> ();
     networkPosition = new Vector3 ();
     networkRotation = new Quaternion ();
+    battleArenaGameObject = GameObject.Find ("BattleArena");
   }
 
   // Start is called before the first frame update
@@ -51,7 +54,8 @@ public class MySynchronisationScript : MonoBehaviour, IPunObservable {
       // If true, this means the photon view is running on my device and I'm the one to who
       // Controls this player. We should send our position & rotation data to the the "REMOTE ME"
       // Which is the version of my player on other peoples devices
-      stream.SendNext (rb.position);
+      // NOTE - We extract our own battle arena position so that users can apply theirs.
+      stream.SendNext (rb.position - battleArenaGameObject.transform.position);
       stream.SendNext (rb.rotation);
 
       if (synchronizeVelocity) {
@@ -63,7 +67,8 @@ public class MySynchronisationScript : MonoBehaviour, IPunObservable {
       }
     } else {
       // If false, it means the stream is reading. Meaning we're listening to other players.
-      networkPosition = (Vector3) stream.ReceiveNext ();
+      // NOTE - We add our battle arena postion as offset to the other users position
+      networkPosition = (Vector3) stream.ReceiveNext () + battleArenaGameObject.transform.position;
       networkRotation = (Quaternion) stream.ReceiveNext ();
 
       if (isTeleportEnabled) {

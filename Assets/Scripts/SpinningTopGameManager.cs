@@ -11,6 +11,9 @@ public class SpinningTopGameManager : MonoBehaviourPunCallbacks {
   public GameObject ui_InformPanelGameObject;
   public TextMeshProUGUI ui_InformText;
   public GameObject searchForGamesButtonGameObject;
+  public GameObject adjust_Button;
+  public GameObject raycast_Center_Image;
+
   // Start is called before the first frame update
   void Start () {
     ui_InformPanelGameObject.SetActive (true);
@@ -48,7 +51,8 @@ public class SpinningTopGameManager : MonoBehaviourPunCallbacks {
   }
 
   public override void OnJoinedRoom () {
-    base.OnJoinedRoom ();
+    adjust_Button.SetActive (false);
+    raycast_Center_Image.SetActive (false);
     // You're the first in the room
     if (PhotonNetwork.CurrentRoom.PlayerCount == 1) {
       ui_InformText.text = "joined to" + PhotonNetwork.CurrentRoom.Name + ". Waiting for other players...";
